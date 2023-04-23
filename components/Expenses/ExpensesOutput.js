@@ -3,68 +3,17 @@ import ExpensesSummary from "./ExpensesSummary";
 import ExpensesList from "./ExpensesList";
 import { GlobalStyles } from "../../constants/styles";
 
-const DUMMY_EXPENSES = [
-  {
-    id: "e1",
-    title: "Toilet Paper",
-    amount: 3.99,
-    date: new Date(2020, 7, 14),
-  },
-  {
-    id: "e2",
-    title: "Pants",
-    amount: 33.99,
-    date: new Date(2021, 5, 24),
-  },
-  {
-    id: "e3",
-    title: "Fruits",
-    amount: 13.99,
-    date: new Date(2023, 3, 14),
-  },
-  {
-    id: "e4",
-    title: "Book",
-    amount: 5.99,
-    date: new Date(2023, 1, 1),
-  },
-  {
-    id: "e5",
-    title: "Book",
-    amount: 5.99,
-    date: new Date(2023, 1, 1),
-  },
-  {
-    id: "e6",
-    title: "Book",
-    amount: 5.99,
-    date: new Date(2023, 1, 1),
-  },
-  {
-    id: "e7",
-    title: "Book",
-    amount: 5.99,
-    date: new Date(2023, 1, 1),
-  },
-  {
-    id: "e8",
-    title: "Book",
-    amount: 5.99,
-    date: new Date(2023, 1, 1),
-  },
-  {
-    id: "e9",
-    title: "Book",
-    amount: 5.99,
-    date: new Date(2023, 1, 1),
-  },
-];
+const ExpensesOutput = ({ expenses, expensesPeriod, fallbackText }) => {
+  let content = <Text style={styles.infoText}>{fallbackText}</Text>;
 
-const ExpensesOutput = ({ expenses, expensesPeriod }) => {
+  if (expenses.length > 0) {
+    content = <ExpensesList expenses={expenses} />;
+  }
+
   return (
     <View style={styles.container}>
-      <ExpensesSummary periodName={expensesPeriod} expenses={DUMMY_EXPENSES} />
-      <ExpensesList expenses={DUMMY_EXPENSES} />
+      <ExpensesSummary periodName={expensesPeriod} expenses={expenses} />
+      {content}
     </View>
   );
 };
@@ -76,6 +25,12 @@ const styles = StyleSheet.create({
     paddingTop: 34,
     paddingBottom: 0,
     backgroundColor: "white",
+  },
+  infoText: {
+    color: GlobalStyles.color.darkTeal,
+    fontSize: 16,
+    textAlign: "center",
+    marginTop: 32,
   },
 });
 
